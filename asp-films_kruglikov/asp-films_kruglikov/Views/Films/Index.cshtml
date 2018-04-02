@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var film in ViewBag.Films)
+{
+    <div>
+        <p>@film.Title</p>
+        <img src="@Url.Action("GetImage", "Films", new { film.Id })"/>
+        <p>@film.Year</p>
+        <p>@film.Description</p>
+    </div>
+}
