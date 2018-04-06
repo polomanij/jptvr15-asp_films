@@ -1,16 +1,32 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>My films</h2>
 
 @foreach (var film in ViewBag.Films)
 {
-    <div>
-        <p>@film.Title</p>
-        <img src="@Url.Action("GetImage", "Films", new { film.Id })"/>
-        <p>@film.Year</p>
-        <p>@film.Description</p>
+    <div style="display:flex; margin-bottom:15px">
+        <div class="film-img" style="margin-right:15px">
+            <img src="@Url.Action("GetFilmImage", "Films", new { film.Id })" />
+        </div>
+        <div class="film-info">
+            <h2>@film.Title</h2>
+            <span>Описание:</span>
+            <p>@film.Description</p>
+            <p><span>Год выхода: </span>@film.Year</p>
+            <p><span>Страна: </span>@film.Country</p>
+            <span>Актеры:</span>
+            @foreach (var actor in film.FilmActors)
+            {
+                string linkName = @actor.Actor.FirstName + " " + @actor.Actor.LastName;
+                /*<p>
+                   <!-- <a href="/Films/Actor/@actor.Actor.Id">@actor.Actor.FirstName</a>-->
+                </p>*/
+                <p>
+                </p>
+                @Html.ActionLink(@linkName, "Actor",  new { id = @actor.Actor.Id });
+            }
+        </div>
     </div>
 }

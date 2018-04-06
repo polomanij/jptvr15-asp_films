@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Actor";
+}
+
+<h2>Актеры</h2>
+
+<h5>Актер: @ViewBag.Actor.FirstName @ViewBag.Actor.LastName</h5>
+
+<div style="display:flex">
+    <div>
+        <img src="@Url.Action("GetActorImage", "Films", new { @ViewBag.Actor.Id })"/>
+    </div>
+    <div>
+
+    </div>
+</div>

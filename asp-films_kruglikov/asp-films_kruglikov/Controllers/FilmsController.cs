@@ -12,10 +12,9 @@ SET Cover = (
     SELECT *
     FROM OPENROWSET(BULK 'Z:\Popova\ASP.Net\FilmsActors\FilmsPhoto\matrix.jpg', SINGLE_BLOB)AS x )
 WHERE Id = 2;*/
-
     public class FilmsController : Controller
     {
-        filmsEntities2 db = new filmsEntities2();
+        public filmsEntities2 db = new filmsEntities2();
         // GET: Films
         public ActionResult Index()
         {
@@ -23,14 +22,39 @@ WHERE Id = 2;*/
             return View();
         }
 
-        public FileContentResult GetImage(int id)
+        public ActionResult Actor(string id)
         {
-            filmsEntities2 db = new filmsEntities2();
+            int actorId = Int32.Parse(id);
+            Actor actor = db.Actors.FirstOrDefault(g => g.Id == actorId);
+            if (actor != null)
+            {
+                ViewBag.Actor = actor;
+            } else
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
 
+        public FileContentResult GetFilmImage(int id)
+        {
             Film film = db.Films.FirstOrDefault(g => g.Id == id);
             if (film != null)
             {
                 return File(film.Cover, film.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public FileContentResult GetActorImage(int id)
+        {
+            Actor actor = db.Actors.FirstOrDefault(g => g.Id == id);
+            if (actor != null)
+            {
+                return File(actor.Photo, actor.ImageMimeType);
             }
             else
             {
