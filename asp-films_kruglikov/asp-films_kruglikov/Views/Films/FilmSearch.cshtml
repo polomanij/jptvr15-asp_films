@@ -1,0 +1,16 @@
+﻿@model IEnumerable<asp_films_kruglikov.Models.Film>
+
+<h2>Поиск фильмов по стране: @Model.First().Country</h2>
+
+<div style="margin-top:20px">
+    @foreach (var film in @Model)
+    {
+        <div style="margin-bottom:15px">
+            <div class="film-info">
+                <h2>@film.Title</h2>
+                <p>@film.Description</p>
+                <p><strong>Страна: </strong>@film.Country</p>
+            </div>
+        </div>
+    }
+</div>

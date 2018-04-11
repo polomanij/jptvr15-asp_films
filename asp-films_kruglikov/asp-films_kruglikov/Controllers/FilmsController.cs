@@ -24,6 +24,11 @@ WHERE Id = 2;*/
 
         public ActionResult Actor(string id)
         {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
             int actorId = Int32.Parse(id);
             Actor actor = db.Actors.FirstOrDefault(g => g.Id == actorId);
             if (actor != null)
@@ -34,6 +39,26 @@ WHERE Id = 2;*/
                 return HttpNotFound();
             }
             return View();
+        }
+
+        public ActionResult Films()
+        {
+            ViewBag.Films = db.Films;
+            return View();
+        }
+
+        public ActionResult FilmSearch(string name)
+        {
+            var allFilms = db.Films.Where(b => b.Country.Equals(name)).OrderBy(p => p.Title).ToList();
+
+            if (allFilms.Count <= 0)
+            {
+                allFilms = db.Films.OrderBy(p => p.Title).ToList();
+                // return HttpNotFound();
+               // return PartialView(allFilms);
+            }
+
+            return PartialView(allFilms);
         }
 
         public FileContentResult GetFilmImage(int id)

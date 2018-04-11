@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Films";
+}
+
+<h2>Films</h2>
+
+<div>
+    @using (Ajax.BeginForm("FilmSearch", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        <p> Найти фильмы по стране: </p>
+        <input type="text" placeholder="Введите страну" name="name"/>
+        <input type="submit" value="Отправть"/>
+    }
+</div>
+<div id="results">
+    <div style="margin-top:20px">
+        @foreach (var film in ViewBag.Films)
+        {
+            <div style="margin-bottom:15px">
+                <div class="film-info">
+                    <h2>@film.Title</h2>
+                    <p>@film.Description</p>
+                    <p><strong>Год выхода: </strong>@film.Year</p>
+                    <p><strong>Страна: </strong>@film.Country</p>
+                    <span>Актеры:</span>
+                    <ul>
+                        @foreach (var actor in film.FilmActors)
+                        {
+                            <li>
+                                @actor.Actor.FirstName @actor.Actor.LastName
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>

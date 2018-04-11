@@ -20,9 +20,6 @@
             @foreach (var actor in film.FilmActors)
             {
                 string linkName = @actor.Actor.FirstName + " " + @actor.Actor.LastName;
-                /*<p>
-                   <!-- <a href="/Films/Actor/@actor.Actor.Id">@actor.Actor.FirstName</a>-->
-                </p>*/
                 <p>
                 </p>
                 @Html.ActionLink(@linkName, "Actor",  new { id = @actor.Actor.Id });

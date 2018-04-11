@@ -10,7 +10,16 @@
     <div>
         <img src="@Url.Action("GetActorImage", "Films", new { @ViewBag.Actor.Id })"/>
     </div>
-    <div>
-
+    <div style="margin-left:15px">
+        <h3>Фильмография:</h3>
+        <ul>
+            @foreach (var actor in ViewBag.actor.FilmActors)
+            {
+                <li>@actor.Film.Title</li>
+            }
+        </ul>
     </div>
+</div>
+<div style="margin-top:15px; font-size:20px;">
+    @Html.ActionLink("List of Films", "Index")
 </div>
